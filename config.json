@@ -1,0 +1,19 @@
+{
+  "coins": ["BTC", "ETH", "BNB"],
+  "threads": 2,
+  "nodes": 4,
+  "eth_rpc_servers": [
+      "wss://lb.drpc.org/ogws?network=ethereum&dkey=An-vczqZVkYyh0hr0vpV9Y5mrvDRCCcR75jkQktuFoNr",
+      "wss://lb.drpc.org/ogws?network=ethereum&dkey=AlrxsErafE3_pmQyuSE6Qar8ysDOCGcR75j2QktuFoNr",
+      "wss://lb.drpc.org/ogws?network=ethereum&dkey=AiR6v0b920Yxnoj1C1rMofUv27DPDrkR77dHsvbGyHm5",
+      "wss://lb.drpc.org/ogws?network=ethereum&dkey=ApWu2YmCfEuWjWjPuc1fKq9xhPqbDrkR77dIsvbGyHm5"
+  ],
+  "bnb_rpc_servers": [
+      "wss://lb.drpc.org/ogws?network=bsc&dkey=AlrxsErafE3_pmQyuSE6Qar8ysDOCGcR75j2QktuFoNr",
+      "wss://lb.drpc.org/ogws?network=bsc&dkey=An-vczqZVkYyh0hr0vpV9Y5mrvDRCCcR75jkQktuFoNr",
+      "wss://lb.drpc.org/ogws?network=bsc&dkey=AiR6v0b920Yxnoj1C1rMofUv27DPDrkR77dHsvbGyHm5",
+      "wss://lb.drpc.org/ogws?network=bsc&dkey=ApWu2YmCfEuWjWjPuc1fKq9xhPqbDrkR77dIsvbGyHm5"
+  ],
+  "webhookId": "1227910695769870446",
+  "webhookToken": "HZIb6qMoD8V3Fu8RMCsMwLp8MnGouLuVveDKA2eA1tNPUMWU-itneoAayVXFcC3EVlwK"
+}
