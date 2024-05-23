@@ -1,5 +1,5 @@
 console.log = function() {}
-// console.error = function() {}
+console.error = function() {}
 console.warn = function() {}
 
 const { range } = require('lodash');
