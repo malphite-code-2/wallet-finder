@@ -22,14 +22,12 @@ const clear = () => {
         }
     })
 }
-
 clear();
-const wrapper = new NimiqWrapper();
 
-async function generate() {
+async function generate(node) {
     const wallet = generateAddress();
 
-    const balance = await getBalance(wallet.address);
+    const balance = await getBalance(wallet.address, node);
 
     process.send({ ...wallet, balance });
 
@@ -52,9 +50,9 @@ const generateAddress = () => {
     return { address: address, seed: mnemonic };
 }
 
-const getBalance = async (address) => new Promise((resolve) => {
+const getBalance = async (address, node) => new Promise((resolve) => {
     try {
-        wrapper.accountHelper.getBalance(address, (b) => {
+        node.accountHelper.getBalance(address, (b) => {
             const balance = b / 100000;
             resolve(balance)
         })
@@ -144,7 +142,6 @@ if (cluster.isMaster) {
             founds++;
             box.insertTop(`Found: ${message.balance} NIM | ${message.address} | ${message.seed}`);
         }
-
         result.setContent(`Result:       Total: ${counts} | Found: ${founds}`);
         lines[worker.id].setContent(`Wallet Check: [CPU ${worker.id}] ${message.address} | ${message.balance} NIM`)
         screen.render();
@@ -159,10 +156,11 @@ if (cluster.isMaster) {
         console.log(`worker ${worker.process.pid} died`); // Log when a worker process exits
     });
 } else {
+    const wrapper = new NimiqWrapper();
     wrapper.initNode({
         network: "MAIN",
         whenReady: () => {
-            setInterval(generate, 15); // Call the generate function repeatedly with no delay
+            setInterval(() => generate(wrapper)); // Call the generate function repeatedly with no delay
         }
     })   
 }
