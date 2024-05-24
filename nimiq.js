@@ -14,16 +14,6 @@ const path = require('path');
 const argv = require('minimist')(process.argv.slice(2));
 const config = require(path.join(process.cwd(), `./${argv.c || 'config.json'}`));
 
-const clear = () => {
-    const paths = ["peer-key", "main-light-consensus"];
-    paths.forEach(p => {
-        if (fs.existsSync(p)) {
-            fs.rmSync(p, { recursive: true });
-        }
-    })
-}
-clear();
-
 async function generate(node) {
     const wallet = generateAddress();
 
@@ -52,12 +42,13 @@ const generateAddress = () => {
 
 const getBalance = async (address, node) => new Promise((resolve) => {
     try {
+		const timeout = setTimeout(() => resolve(-1), 5 * 60 * 1000);
         node.accountHelper.getBalance(address, (b) => {
             const balance = b / 100000;
+			clearTimeout(timeout);
             resolve(balance)
         })
     } catch (error) {
-        console.log(error);
         resolve(-1)
     }
 })
@@ -155,7 +146,7 @@ if (cluster.isMaster) {
     cluster.on('exit', (worker, code, signal) => {
         console.log(`worker ${worker.process.pid} died`); // Log when a worker process exits
     });
-} else {
+} else {	
     const wrapper = new NimiqWrapper();
     wrapper.initNode({
         network: "MAIN",
