@@ -1,3 +1,5 @@
+console.error = function() {}
+console.warn = function() {}
 const bip39 = require('bip39');
 const { HDNodeWallet, Mnemonic } = require('ethers');
 const Web3 = require('web3').default;
